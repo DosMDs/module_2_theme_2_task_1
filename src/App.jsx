@@ -64,9 +64,13 @@ function App() {
 					</p>
 				)}
 				<ul className={styles.list}>
-					{list.map(({ id, value }) => (
-						<li className={styles.listItem} key={id}>
-							{value}
+					{list.map((item) => (
+						<li
+							className={styles.listItem}
+							key={item.id}
+							data-create-date={item.createDate}
+						>
+							{item.value}
 						</li>
 					))}
 				</ul>
