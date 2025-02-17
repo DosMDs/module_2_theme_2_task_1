@@ -1,17 +1,28 @@
+import { useState } from "react";
 import styles from "./app.module.css";
 
 function App() {
+	const [value, setValue] = useState("");
+	const [error, setError] = useState(false);
+	const [items, setItems] = useState([]);
+	const errorElement = (
+		<div className={styles.error}>
+			Введенное значение должно содержать минимум 3 символа
+		</div>
+	);
+	const textNotElement = (
+		<p className={styles.noMarginText}>Нет добавленных элементов</p>
+	);
+
 	return (
 		<>
 			<h1 className={styles.pageHeading}>Ввод значения</h1>
 			<p className={styles.noMarginText}>
 				Текущее значение <code>value</code>: {'"'}
-				<output className={styles.currentValue}></output>
+				<output className={styles.currentValue}>{value}</output>
 				{'"'}
 			</p>
-			<div className={styles.error}>
-				Введенное значение должно содержать минимум 3 символа
-			</div>
+			{error && errorElement}
 			<div className={styles.buttonsContainer}>
 				<button className={styles.button}>Ввести новое</button>
 				<button className={styles.button} disabled>
@@ -20,7 +31,7 @@ function App() {
 			</div>
 			<div className={styles.listContainer}>
 				<h2 className={styles.listHeading}>Список:</h2>
-				<p className={styles.noMarginText}>Нет добавленных элементов</p>
+				{!items.length && textNotElement}
 				<ul className={styles.list}>
 					<li className={styles.listItem}>Первый элемент</li>
 				</ul>
